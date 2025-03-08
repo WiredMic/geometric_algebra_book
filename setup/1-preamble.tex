@@ -1,0 +1,358 @@
+\documentclass[12pt,twoside,a4paper,openright]{report}
+% \documentclass[12pt,a4paper]{report}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title and other reusable elements
+% http://en.wikibooks.org/wiki/LaTeX/Internationalization
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% choose lanuage
+\newcommand{\mylanguage}{danish} % danish or english
+\newcommand{\mytitle}{Attiude Control and Magnetorquer}
+\title{\mytitle}
+\newcommand{\mysubtitle}{Monitorering af fejl i trailerkredsløb og advarsel af bruger}
+\newcommand{\myprojecttype}{Semester Projekt} % Semester Project % Master's Project % Bachelor Project
+\newcommand{\myeducation}{ESD} % three letter acronym
+\newcommand{\mysemester}{2} % in numbers
+\newcommand{\mygroup}{214} % in numbers
+\newcommand{\mytheme}{Satellite}
+% find a good way to write the names and emails here
+% when using the author names it need to be able to be formated
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Language
+% http://en.wikibooks.org/wiki/LaTeX/Internationalization
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% used to detect the language
+\usepackage{iflang}
+
+% Make latex understand and use the typographic
+% rules of the language used in the document.
+\usepackage[english,danish]{babel}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Graphics and Tables
+% http://en.wikibooks.org/wiki/LaTeX/Importing_Graphics
+% http://en.wikibooks.org/wiki/LaTeX/Tables
+% http://en.wikibooks.org/wiki/LaTeX/Colors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% load a colour package
+\usepackage[table]{xcolor}
+\definecolor{aaublue}{RGB}{34, 35, 78}% dark blue
+
+% The standard graphics inclusion package
+\usepackage{graphicx}
+\usepackage[inkscapelatex=false]{svg}
+
+
+% Use images with a correct copyright attributions
+\usepackage{caption, copyrightbox, ccicons}
+
+% Set up how figure and table captions are displayed
+\usepackage{caption}
+\captionsetup{%
+	font=footnotesize,% set font size to footnotesize
+	labelfont=bf % bold label (e.g., Figure 3.2) font
+}
+\usepackage{subcaption}
+
+% new floating environments
+\usepackage{newfloat}
+% Lists
+% \newlistof{figlist}{los}{List of Lists}
+\DeclareFloatingEnvironment[
+	fileext=los,
+	listname={List of Lists},
+	name=List,
+	placement=tbhp,
+	within=section,
+]{figlist}
+%Set names for the English language
+\addto\captionsenglish{%
+	\renewcommand\figlistname{List}%
+	\renewcommand\listfiglistname{List of Lists}%
+}
+%Set names for the Danish language
+\addto\captionsdanish{%
+	\renewcommand\figlistname{Liste}%
+	\renewcommand\listfiglistname{Lister}%
+}
+
+% Make the standard latex tables look so much better
+\usepackage{array,booktabs}
+% Used to diffine contant with tables
+\usepackage{tabularx} % http://ctan.org/pkg/tabularx
+% \usepackage{makecell}
+\usepackage{multirow}
+\usepackage[l3]{csvsimple}
+\usepackage{pgf-pie}
+\usepackage{longtable}
+
+% Enable the use of frames around, e.g., theorems
+% The framed package is used in the example environment
+\usepackage{framed}
+
+% Adds support for full page background picture
+\usepackage[contents={},color=gray]{background}
+%\usepackage[contents=draft,color=gray]{background}
+
+% https://www.overleaf.com/learn/latex/Code_Highlighting_with_minted
+\usepackage{minted}
+\usemintedstyle{xcode}
+% inline code
+\definecolor{light-gray}{gray}{0.95}
+\newcommand{\codeCpp}[1]{\mintinline[breaklines,breakafter=_]{c++}|#1|}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Mathematics
+% http://en.wikibooks.org/wiki/LaTeX/Mathematics
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Defines new environments such as equation,
+% align and split
+\usepackage{amsmath}
+% Adds new math symbols
+\usepackage{amssymb}
+% Use theorems in your document
+% The ntheorem package is also used for the example environment
+% When using thmmarks, amsmath must be an option as well. Otherwise
+% \eqref doesn't work anymore.
+\usepackage[framed,amsmath,thmmarks]{ntheorem}
+% To use SI units in math
+\usepackage{siunitx}
+% \usepackage{icomma} % %comma seperator
+\usepackage{derivative}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tikz and PGF 
+% https://www.overleaf.com/learn/latex/TikZ_package
+% https://www.overleaf.com/learn/latex/CircuiTikz_package
+% https://ctan.org/pkg/gnuplottex?lang=en
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{tikz}
+\usetikzlibrary{calc,patterns,angles,quotes,decorations.pathmorphing,decorations.text,math,decorations.pathreplacing,decorations.markings,automata,arrows.meta,positioning,external}
+\usepackage[european]{circuitikz}
+\usepackage{tikzsymbols}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+% \usepackage[siunitx]{gnuplottex}
+\usepackage{pgfplots}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Page Layout
+% http://en.wikibooks.org/wiki/LaTeX/Page_Layout
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Change margins, papersize, etc of the document
+\usepackage[
+	inner=28mm,% left margin on an odd page
+	outer=41mm,% right margin on an odd page
+	% top=-4pt,
+]{geometry}
+
+% Modify how \chapter, \section, etc. look
+% The titlesec package is very configureable
+\usepackage{titlesec}
+\titleformat{\chapter}[display]{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titleformat*{\section}{\normalfont\Large\bfseries}
+\titleformat*{\subsection}{\normalfont\large\bfseries}
+\titleformat*{\subsubsection}{\normalfont\normalsize\bfseries}
+%\titleformat*{\paragraph}{\normalfont\normalsize\bfseries}
+%\titleformat*{\subparagraph}{\normalfont\normalsize\bfseries}
+
+% Clear empty pages between chapters
+\let\origdoublepage\cleardoublepage
+\newcommand{\clearemptydoublepage}{%
+	\clearpage
+	{\pagestyle{empty}\origdoublepage}%
+}
+\let\cleardoublepage\clearemptydoublepage
+
+% Change the headers and footers
+\usepackage{fancyhdr}
+\fancypagestyle{plain}{%
+	\fancyhf{} %delete everything
+	\renewcommand{\headrulewidth}{0pt} %remove the horizontal line in the header
+	\fancyfoot[LO,RE]{\thepage} %page number on all pages
+	\raggedbottom
+}
+\fancypagestyle{fancy}{%
+	\fancyhf{} %delete everything
+	\renewcommand{\headrulewidth}{0pt} %remove the horizontal line in the header
+	\fancyhead[LO,RE]{\large \mytitle} % Name of project
+	\fancyhead[LE,RO]{\myeducation\mysemester\ G\mygroup} % Groupe number on all pages
+	\fancyfoot[LO,RE]{\thepage \ af \pageref{LastPage}} %page number on all pages
+	% Do not stretch the content of a page. Instead,
+	% insert white space at the bottom of the page
+	\raggedbottom
+}
+\pagestyle{fancy}
+\fancypagestyle{chapter}{%
+	% \pagestyle{fancy}
+	\fancyhf{} %delete everything
+	\renewcommand{\headrulewidth}{0pt} %remove the horizontal line in the header
+	\fancyfoot[LO,RE]{\thepage \ af \pageref{LastPage}} %page number on all pages
+	% Do not stretch the content of a page. Instead,
+	% insert white space at the bottom of the page
+	% \headheight{18px}
+
+	\raggedbottom
+}
+
+\usepackage{titlesec}
+% Chapter style
+\titleformat
+{\chapter}% command
+[display]% shape
+{
+	\thispagestyle{chapter}
+	\Huge
+	\bfseries
+}% format
+{\vspace{-2cm}
+	\filleft\hspace*{-60pt}{\Huge\colorbox{white}{\parbox[c][2cm][c]{2cm}{\fontsize{2cm}{1cm}\selectfont\centering\thechapter}}}
+}% label
+{0.5cm}% sep
+{
+	\vspace{0.5cm}
+	\filleft
+}% before-code
+[
+]% after-code
+
+% Enable arithmetics with length. Useful when
+% typesetting the layout.
+\usepackage{calc}
+
+% Used to write dommy text
+\usepackage{lipsum}
+
+% Used to make begin comment
+\usepackage{comment}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliography
+% http://en.wikibooks.org/wiki/LaTeX/Bibliography_Management
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[backend=biber,
+	bibencoding=utf8,
+	style=numeric-comp,
+	sorting=none
+]{biblatex}
+\addbibresource{bib/main.bib}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Misc
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Add bibliography and index to the table of
+% contents
+\usepackage[nottoc]{tocbibind}
+% Add the command \pageref{LastPage} which refers to the
+% page number of the last page
+\usepackage{lastpage}
+% Add todo notes in the margin of the document
+\usepackage[
+	%  disable, %turn off todonotes
+	colorinlistoftodos, %enable a coloured square in the list of todos
+	textwidth=\marginparwidth, %set the width of the todonotes
+	textsize=scriptsize, %size of the text in the todonotes
+]{todonotes}
+
+% Suppress warnings
+\usepackage{silence}
+\WarningsOff[everypage]% Suppress warnings related to package everypage
+
+% Time 
+\usepackage{datetime2}
+\DTMsetdatestyle{iso}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Hyperlinks
+% http://en.wikibooks.org/wiki/LaTeX/Hyperlinks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Enable hyperlinks and insert info into the pdf
+% file. Hypperref should be loaded as one of the
+% last packages
+\usepackage{hyperref}
+\hypersetup{%
+	% pdfpagelabels=true,%
+	plainpages=false,%
+	pdfauthor={Author(s)},%
+	pdftitle={Title},%
+	pdfsubject={Subject},%
+	pdfborder=0 0 0,
+	bookmarksnumbered=true,%
+	colorlinks=false,%
+	citecolor=black,%
+	filecolor=black,%
+	linkcolor=black,% you should probably change this to black before printing
+	urlcolor=black,%
+	pdfstartview=FitH%
+}
+% linebreaks in \url
+\usepackage[]{xurl}
+
+
+
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage[danish=guillemets]{csquotes}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Project Management
+% https://www.overleaf.com/learn/latex/Management_in_a_large_project
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \usepackage{import}
+\usepackage{subfiles} % Best loaded last in the preamble
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Encoding and Fonts
+% http://en.wikibooks.org/wiki/LaTeX/Internationalization
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Choose the font encoding
+\usepackage{fontspec}
+\usepackage[
+math-style=ISO,
+bold-style=ISO,
+mathrm=sym,
+mathup=sym,
+mathit=sym,
+mathsf=sym,
+mathbf=sym,
+mathtt=sym,
+]{unicode-math}
+\setmainfont{LibertinusSerif}[
+	Path = \subfix{setup/fonts/Libertinus/static/OTF/},
+	Scale=1,
+	Contextuals = Alternate,
+	Extension = .otf,
+	UprightFont =*-Regular,
+	BoldFont = *-Bold,
+	ItalicFont = *-Italic,
+	BoldItalicFont = *-BoldItalic,
+]
+\setmathfont{LibertinusMath-Regular}[ % for math symbols, can be any other OpenType math font
+	Path = \subfix{setup/fonts/Libertinus/static/OTF/},
+	Scale=1,
+	% Ligatures=TeX,
+	Extension = .otf,
+]
+
+\setmonofont{JetBrainsMonoNerdFont}[
+	Path = \subfix{setup/fonts/JetBrainsMono/},
+	Scale=0.85,
+	Contextuals = Alternate,
+	Extension = .ttf,
+	UprightFont =*-Regular,
+	BoldFont = *-Bold,
+	ItalicFont = *-Italic,
+	BoldItalicFont = *-BoldItalic,
+]
+
+\usepackage{emoji}
+\setemojifont{Noto Color Emoji}
+
+
